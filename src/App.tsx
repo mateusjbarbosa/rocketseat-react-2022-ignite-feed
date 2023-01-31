@@ -1,4 +1,5 @@
 import { Header } from './components/Header';
+import { Post } from './components/Post';
 import { Sidebar } from './components/Sidebar';
 import { Wrapper } from './components/Wrapper';
 import './global.css';
@@ -10,7 +11,9 @@ export function App() {
 
       <Wrapper>
         <Sidebar />
-        <main>posts</main>
+        <main>
+          <Post />
+        </main>
       </Wrapper>
     </>
   )
