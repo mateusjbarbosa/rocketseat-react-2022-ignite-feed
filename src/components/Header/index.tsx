@@ -1,10 +1,9 @@
-import style from './style.module.css';
-
 import igniteLogoPath from '../../assets/ignite-logo.svg';
+import styles from './styles.module.css';
 
 export function Header() {
   return (
-    <header className={style.header}>
+    <header className={styles.header}>
       <img src={igniteLogoPath} alt="Logo do Ignite" />
     </header>
   )
