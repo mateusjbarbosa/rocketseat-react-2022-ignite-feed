@@ -1,41 +1,104 @@
+import { format, formatDistanceToNow } from "date-fns";
+import ptBR from "date-fns/locale/pt-BR";
 import { HandsClapping, Trash } from 'phosphor-react';
+import { useState } from "react";
+import { Author, TextContent } from '../../models';
 import { Avatar } from '../Avatar';
 import styles from './styles.module.css';
 
-export function Comment() {
+interface Props {
+  author: Author;
+  content: TextContent[];
+  id: number;
+  onDeleteComment: (commentID: number) => void;
+  publishedAt: Date;
+}
+
+export function Comment({ author, content, id, onDeleteComment, publishedAt }: Props) {
+  const [likesCount, setLikesCount] = useState<number>(0);
+
+  const publishedDateFormatted = format(
+    publishedAt,
+    "d 'de' LLLL 'às' HH:mm'h'",
+    {
+      locale: ptBR,
+    }
+  );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    addSuffix: true,
+    locale: ptBR,
+  });
+
+  function handleDeleteComment() {
+    onDeleteComment(id)
+  }
+
+  function handleLikeComment() {
+    setLikesCount(currentValue => currentValue + 1)
+  }
+
   return (
    <div className={styles.comment}>
     <Avatar
       alt=""
       hasBorder={false}
-      picture="https://images.unsplash.com/photo-1531518326825-96490ddf2a89?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHlvdW5nJTIwZ2lybCUyMGJsYWNrJTIwaGFpcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=30"
+      picture={author.avatarURL}
     />
 
     <div className={styles.box}>
       <div className={styles.content}>
         <header>
           <div className={styles.authorAndTime}>
-            <strong>Helena Ribeiro</strong>
+            <strong>{author.name}</strong>
             <time
-              title="01 de Fevereiro de 2023 às 10:33"
-              dateTime="2023-02-01 10:33:00"
+              title={publishedDateFormatted}
+              dateTime={publishedAt.toISOString()}
             >
-              Cerca de 1h atrás
+              {publishedDateRelativeToNow}
             </time>
           </div>
 
-          <button title="Deletar comentário">
+          <button
+            onClick={handleDeleteComment}
+            title="Deletar comentário"
+          >
             <Trash size={24}/>
           </button>
         </header>
 
-        <p>Muito legal, irmão! 👏🏻👏🏻</p>
+        {content.map((line) => {
+          switch (line.type) {
+            case "paragraph": {
+              return (
+                <p
+                  key={`${author.name}_${publishedAt.toISOString()}_${
+                    line.content
+                  }`}
+                >
+                  {line.content}
+                </p>
+              );
+            }
+            case "link": {
+              return (
+                <p
+                  key={`${author.name}_${publishedAt.toISOString()}_${
+                    line.content
+                  }`}
+                >
+                  <a href="#">{line.content}</a>
+                </p>
+              );
+            }
+          }
+        })}
       </div>
 
       <footer>
-        <button>
+        <button onClick={handleLikeComment}>
           <HandsClapping />
-          Aplaudir <span>20</span>
+          Aplaudir <span>{likesCount}</span>
         </button>
       </footer>
     </div>
