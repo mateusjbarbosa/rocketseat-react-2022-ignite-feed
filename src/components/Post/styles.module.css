@@ -90,7 +90,7 @@
   max-height: none;
 }
 
-.commentForm button[type=submit] {
+.commentForm button[type="submit"] {
   background-color: var(--green-500);
   color: var(--white);
 
@@ -105,19 +105,19 @@
   cursor: pointer;
 }
 
-.commentForm button[type=submit]:not(:disabled):hover {
+.commentForm button[type="submit"]:not(:disabled):hover {
   background-color: var(--green-300);
 
   transition: background-color 0.1s;
 }
 
-.commentForm button[type=submit]:focus {
+.commentForm button[type="submit"]:focus {
   box-shadow: 0 0 0 2px var(--white);
 
   transition: background-color 0.1s;
 }
 
-.commentForm button[type=submit]:disabled {
+.commentForm button[type="submit"]:disabled {
   opacity: 0.4;
 
   cursor: not-allowed;

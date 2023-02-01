@@ -1,11 +1,11 @@
 export interface Author {
-  avatarURL: string,
+  avatarURL: string;
   name: string;
   role: string;
 }
 
 export interface TextContent {
-  type: 'paragraph' | 'link',
+  type: "paragraph" | "link";
   content: string;
 }
 
