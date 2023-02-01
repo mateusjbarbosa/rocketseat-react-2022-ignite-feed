@@ -31,7 +31,7 @@ export function Post({ author, content, id, profile, publishedAt }: Props) {
     locale: ptBR,
   });
 
-  function handleNewComment(e: React.SyntheticEvent) {
+  function handleNewComment(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     setComments([
