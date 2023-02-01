@@ -1,3 +1,4 @@
+import React from "react";
 import { Header } from "./components/Header";
 import { Post } from "./components/Post";
 import { Sidebar } from "./components/Sidebar";
@@ -5,7 +6,7 @@ import { Wrapper } from "./components/Wrapper";
 import "./global.css";
 import { posts, profile } from "./mockData";
 
-export function App() {
+export function App(): React.ReactElement {
   return (
     <>
       <Header />

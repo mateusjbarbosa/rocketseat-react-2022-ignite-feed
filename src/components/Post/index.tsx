@@ -1,7 +1,12 @@
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import React, { useState } from "react";
-import { Author, Comment as CommentModel, Profile as ProfileModel, TextContent } from "../../models";
+import {
+  Author,
+  Comment as CommentModel,
+  Profile as ProfileModel,
+  TextContent,
+} from "../../models";
 import { Comment } from "../Comment";
 import { Profile } from "../Profile";
 import styles from "./styles.module.css";
@@ -16,7 +21,7 @@ interface Props {
 
 export function Post({ author, content, id, profile, publishedAt }: Props) {
   const [comments, setComments] = useState<CommentModel[]>([]);
-  const [newCommentText, setNewCommentText] = useState<string>('');
+  const [newCommentText, setNewCommentText] = useState<string>("");
 
   const publishedDateFormatted = format(
     publishedAt,
@@ -41,38 +46,40 @@ export function Post({ author, content, id, profile, publishedAt }: Props) {
         author: {
           avatarURL: profile.avatarURL,
           name: profile.name,
-          role: profile.role
+          role: profile.role,
         },
         content: [
           {
-            type: 'paragraph',
-            content: newCommentText
-          }
+            type: "paragraph",
+            content: newCommentText,
+          },
         ],
         postID: id,
         publishedAt: new Date(),
-      }
-    ])
+      },
+    ]);
 
-    setNewCommentText('')
+    setNewCommentText("");
   }
 
   function handleNewCommentChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
-    e.target.setCustomValidity('');
-    setNewCommentText(e.target.value)
+    e.target.setCustomValidity("");
+    setNewCommentText(e.target.value);
   }
 
   function handleNewCommentInvalid(e: React.InvalidEvent<HTMLTextAreaElement>) {
-    e.target.setCustomValidity('Este campo é obrigatório');
+    e.target.setCustomValidity("Este campo é obrigatório");
   }
 
   function deleteComment(commentID: number) {
-    const commentsWithoutDeletedOne = comments.filter(comment => comment.id !== commentID)
+    const commentsWithoutDeletedOne = comments.filter(
+      (comment) => comment.id !== commentID
+    );
 
-    setComments(commentsWithoutDeletedOne)
+    setComments(commentsWithoutDeletedOne);
   }
 
-  const isNewCommentEmpty = newCommentText.length === 0
+  const isNewCommentEmpty = newCommentText.length === 0;
 
   return (
     <article className={styles.post}>
@@ -121,10 +128,7 @@ export function Post({ author, content, id, profile, publishedAt }: Props) {
         })}
       </div>
 
-      <form
-        onSubmit={handleNewComment}
-        className={styles.commentForm}
-      >
+      <form onSubmit={handleNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
         <textarea
@@ -137,17 +141,14 @@ export function Post({ author, content, id, profile, publishedAt }: Props) {
         />
 
         <footer>
-          <button
-            disabled={isNewCommentEmpty}
-            type="submit"
-          >
+          <button disabled={isNewCommentEmpty} type="submit">
             Publicar
           </button>
         </footer>
       </form>
 
       <div className={styles.commentList}>
-        {comments.map(comment => (
+        {comments.map((comment) => (
           <Comment
             key={comment.id}
             author={comment.author}
