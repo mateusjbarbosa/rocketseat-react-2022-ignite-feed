@@ -1,3 +1,4 @@
+import { Avatar } from '../Avatar';
 import styles from './styles.module.css';
 
 interface Props {
@@ -12,10 +13,9 @@ export function Profile({ name, orientation, picture, role }: Props) {
   if (orientation === 'vertical') {
     return (
       <div className={styles.vertical}>
-        <img
-          src={picture}
-          alt="User's profile picture"
-          className={styles.avatar}
+        <Avatar
+          alt=""
+          picture={picture}
         />
 
         <div className={styles.verticalInfo}>
@@ -29,10 +29,9 @@ export function Profile({ name, orientation, picture, role }: Props) {
   if (orientation === 'horizontal') {
     return (
       <div className={styles.horizontal}>
-        <img
-          src={picture}
-          alt="Author's profile picture"
-          className={styles.avatar}
+        <Avatar
+          alt=""
+          picture={picture}
         />
 
         <div className={styles.horizontalInfo}>

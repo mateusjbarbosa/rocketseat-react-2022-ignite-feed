@@ -1,18 +1,3 @@
-.avatar {
-  /**
-  * calculate a avatar width and height based on initial 3rem + outline + border to maintain
-  * picture original size
-  */
-  width: calc(3rem + 12px);
-  height: calc(3rem + 12px);
-
-  outline: 2px solid var(--green-500);
-  border: 4px solid var(--gray-800);
-  border-radius: 0.5rem;
-
-  object-fit: cover;
-}
-
 .vertical {
   display: flex;
   flex-direction: column;
