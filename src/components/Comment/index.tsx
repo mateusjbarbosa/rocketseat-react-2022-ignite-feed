@@ -1,6 +1,7 @@
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import { HandsClapping, Trash } from 'phosphor-react';
+import { useState } from "react";
 import { Author, TextContent } from '../../models';
 import { Avatar } from '../Avatar';
 import styles from './styles.module.css';
@@ -14,6 +15,8 @@ interface Props {
 }
 
 export function Comment({ author, content, id, onDeleteComment, publishedAt }: Props) {
+  const [likesCount, setLikesCount] = useState<number>(0);
+
   const publishedDateFormatted = format(
     publishedAt,
     "d 'de' LLLL 'às' HH:mm'h'",
@@ -29,6 +32,10 @@ export function Comment({ author, content, id, onDeleteComment, publishedAt }: P
 
   function handleDeleteComment() {
     onDeleteComment(id)
+  }
+
+  function handleLikeComment() {
+    setLikesCount(currentValue => currentValue + 1)
   }
 
   return (
@@ -89,9 +96,9 @@ export function Comment({ author, content, id, onDeleteComment, publishedAt }: P
       </div>
 
       <footer>
-        <button>
+        <button onClick={handleLikeComment}>
           <HandsClapping />
-          Aplaudir <span>20</span>
+          Aplaudir <span>{likesCount}</span>
         </button>
       </footer>
     </div>
