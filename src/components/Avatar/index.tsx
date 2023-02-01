@@ -1,4 +1,5 @@
-import styles from './styles.module.css';
+import React from "react";
+import styles from "./styles.module.css";
 
 interface Props {
   alt: string;
@@ -6,12 +7,16 @@ interface Props {
   hasBorder?: boolean;
 }
 
-export function Avatar({alt, picture, hasBorder = true}: Props) {
+export function Avatar({
+  alt,
+  picture,
+  hasBorder = true,
+}: Props): React.ReactElement {
   return (
     <img
       src={picture}
       alt={alt}
       className={hasBorder ? styles.avatarWithBorder : styles.avatar}
     />
-  )
+  );
 }
