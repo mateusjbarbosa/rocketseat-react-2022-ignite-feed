@@ -1,3 +1,4 @@
+import { Comment } from '../Comment';
 import { Profile } from '../Profile';
 import styles from './styles.module.css';
 
@@ -23,7 +24,7 @@ export function Post() {
       <div className={styles.content}>
         <p>Boa tarde, pessoal! 👋🏻</p>
         <p>Criei um aplicativo bacana usando <a href="#">#react</a> aqui enquanto estava estudando algumas coisas!</p>
-        <p>Dá uma olhada 🔎 : <a href="#">https://davi.barbosa.dev/react-todo</a></p>
+        <p>Dá uma olhada 🔎 : <a href="#">https://davibarbosa.dev/react-todo</a></p>
       </div>
 
       <form className={styles.commentForm}>
